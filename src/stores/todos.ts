@@ -15,9 +15,17 @@ export const useTodosStore = defineStore('todos', () => {
     if (!todo) return
     todos.value.unshift(todo)
   }
+  /**
+   * 删除待办事项
+   * @param todo 待办事项
+   */
+  const removeTodo = (todo: Todo) => {
+    todos.value.splice(todos.value.indexOf(todo), 1)
+  }
 
   return {
     todos,
-    addTodo
+    addTodo,
+    removeTodo
   }
 })
