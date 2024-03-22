@@ -1,4 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import TodoItem from '@/components/TodoItem.vue'
+import { storeToRefs } from 'pinia'
+import { useTodosStore } from '@/stores/todos'
+
+const { todos } = storeToRefs(useTodosStore())
+</script>
 
 <template>
   <!-- This section should be hidden by default and shown when there are todos -->
@@ -8,22 +14,7 @@
     <ul class="todo-list">
       <!-- These are here just to show the structure of the list items -->
       <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
-      <li class="completed">
-        <div class="view">
-          <input class="toggle" type="checkbox" checked />
-          <label>Taste JavaScript</label>
-          <button class="destroy"></button>
-        </div>
-        <input class="edit" value="Create a TodoMVC template" />
-      </li>
-      <li>
-        <div class="view">
-          <input class="toggle" type="checkbox" />
-          <label>Buy a unicorn</label>
-          <button class="destroy"></button>
-        </div>
-        <input class="edit" value="Rule the web" />
-      </li>
+      <TodoItem v-for="(todo, index) in todos" :key="todo.id" v-model="todos[index]" />
     </ul>
   </section>
 </template>
