@@ -3,9 +3,7 @@ import { ref } from 'vue'
 import type { Todo } from '@/types/todos'
 
 export const useTodosStore = defineStore('todos', () => {
-  /**
-   * 待办事项列表
-   */
+  // 待办事项列表
   const todos = ref<Todo[]>([])
   /**
    * 添加待办事项
