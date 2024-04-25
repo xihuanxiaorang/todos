@@ -1,13 +1,14 @@
 import { defineStore } from 'pinia'
-import { computed, type Ref, ref } from 'vue'
+import { computed, type Ref } from 'vue'
 import type { Todo } from '@/types/todos'
 import { useRoute } from 'vue-router'
+import { useStorage } from '@vueuse/core'
 
 export const useTodosStore = defineStore('todos', () => {
   // 路由实例
   const route = useRoute()
   // 待办事项列表
-  const todos = ref<Todo[]>([])
+  const todos = useStorage('todos', [] as Todo[])
   // 过滤器
   const filters = {
     active: (todos: Ref<Todo[]>) => todos.value.filter((todo) => !todo.completed),
